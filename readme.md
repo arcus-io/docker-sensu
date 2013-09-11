@@ -1,7 +1,5 @@
 # Sensu
 
-Note: this is still under development
-
 Sensu Monitoring
 
 * `docker build -t sensu .`
@@ -9,7 +7,6 @@ Sensu Monitoring
 
 Ports
 
-* 22
 * 8080
 
 Environment Variables
