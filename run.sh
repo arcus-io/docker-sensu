@@ -1,45 +1,49 @@
 #!/bin/sh
 DASHBOARD_USER=${DASHBOARD_USER:-admin}
 DASHBOARD_PASS=${DASHBOARD_PASS:-sensu}
+SENSU_HOST=${SENSU_HOST:-localhost}
+SKIP_CONFIG=${SKIP_CONFIG:-}
 SENSU_CONFIG_URL=${SENSU_CONFIG_URL:-}
 SENSU_CLIENT_CONFIG_URL=${SENSU_CLIENT_CONFIG_URL:-}
 SENSU_CHECKS_CONFIG_URL=${SENSU_CHECKS_CONFIG_URL:-}
 
-if [ ! -z "$SENSU_CONFIG_URL" ] ; then
-    wget --no-check-certificate -O /etc/sensu/config.json $SENSU_CONFIG_URL
-else
-    cat << EOF > /etc/sensu/config.json
-{
-  "rabbitmq": {
-    "port": 5672,
-    "host": "localhost",
-    "user": "guest",
-    "password": "guest",
-    "vhost": "/"
-  },
-  "redis": {
-    "host": "localhost",
-    "port": 6379
-  },
-  "api": {
-    "host": "localhost",
-    "port": 4567
-  },
-  "dashboard": {
-    "host": "localhost",
-    "port": 8080,
-    "user": "$DASHBOARD_USER",
-    "password": "$DASHBOARD_PASS"
-  },
-  "handlers": {
-    "default": {
-      "type": "pipe",
-      "command": "true"
+if [ ! -z "$SKIP_CONFIG" ]; then
+    if [ ! -z "$SENSU_CONFIG_URL" ] ; then
+        wget --no-check-certificate -O /etc/sensu/config.json $SENSU_CONFIG_URL
+    else
+        cat << EOF > /etc/sensu/config.json
+    {
+      "rabbitmq": {
+        "port": 5672,
+        "host": "$SENSU_HOST",
+        "user": "guest",
+        "password": "guest",
+        "vhost": "/"
+      },
+      "redis": {
+        "host": "$SENSU_HOST",
+        "port": 6379
+      },
+      "api": {
+        "host": "$SENSU_HOST",
+        "port": 4567
+      },
+      "dashboard": {
+        "host": "$SENSU_HOST",
+        "port": 8080,
+        "user": "$DASHBOARD_USER",
+        "password": "$DASHBOARD_PASS"
+      },
+      "handlers": {
+        "default": {
+          "type": "pipe",
+          "command": "true"
+        }
+      }
     }
-  }
-}
 
 EOF
+    fi
 fi
 
 if [ ! -z "$SENSU_CLIENT_CONFIG_URL" ] ; then
