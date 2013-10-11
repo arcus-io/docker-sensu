@@ -18,6 +18,8 @@ RUN chmod +x /etc/sensu/plugins/*
 ADD supervisor.conf /opt/supervisor.conf
 ADD run.sh /usr/local/bin/run
 
+VOLUME /etc/sensu
+
 EXPOSE 4567
 EXPOSE 5672
 EXPOSE 6379
