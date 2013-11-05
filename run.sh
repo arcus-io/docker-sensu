@@ -65,7 +65,8 @@ fi
 if [ ! -z "$SENSU_CHECKS_CONFIG_URL" ] ; then
     wget --no-check-certificate -O /etc/sensu/conf.d/checks.json $SENSU_CHECKS_CONFIG_URL
 else
-    cat << EOF > /etc/sensu/conf.d/checks.json
+    if [ ! -e "/etc/sensu/config.json" ] ; then
+    	cat << EOF > /etc/sensu/conf.d/checks.json
 {
   "checks": {
     "sensu-rabbitmq-beam": {
@@ -121,6 +122,7 @@ else
   }
 }
 EOF
+  fi
 fi
 
 supervisord -c /opt/supervisor.conf -n
