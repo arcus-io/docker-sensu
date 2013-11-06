@@ -10,6 +10,7 @@ RUN RUNLEVEL=1 DEBIAN_FRONTEND=noninteractive apt-get install -y sensu ca-certif
 RUN git clone https://github.com/sensu/sensu-community-plugins.git /opt/sensu_plugins
 
 RUN gem install sensu-plugin --no-rdoc --no-ri
+RUN gem install net-ping --no-rdoc --no-ri
 
 RUN rm -rf /etc/sensu/plugins
 RUN ln -sf /opt/sensu_plugins/plugins/ /etc/sensu/plugins
