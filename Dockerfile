@@ -9,9 +9,8 @@ RUN apt-get update
 RUN RUNLEVEL=1 DEBIAN_FRONTEND=noninteractive apt-get install -y sensu ca-certificates rabbitmq-server redis-server supervisor ruby rubygems git-core
 RUN git clone https://github.com/sensu/sensu-community-plugins.git /opt/sensu_plugins
 
-RUN /opt/sensu/embedded/bin/gem install sensu-plugin --no-rdoc --no-ri
-RUN /opt/sensu/embedded/bin/gem install net-ping --no-rdoc --no-ri
-RUN /opt/sensu/embedded/bin/gem install redphone --no-rdoc --no-ri
+RUN gem install sensu-plugin --no-rdoc --no-ri
+RUN gem install redphone --no-rdoc --no-ri
 
 RUN rm -rf /etc/sensu/plugins
 RUN ln -sf /opt/sensu_plugins/plugins/ /etc/sensu/plugins
