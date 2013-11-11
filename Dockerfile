@@ -20,6 +20,7 @@ ADD supervisor.conf /opt/supervisor.conf
 ADD run.sh /usr/local/bin/run
 
 VOLUME /etc/sensu
+VOLUME /var/log/sensu
 
 EXPOSE 4567
 EXPOSE 5672
