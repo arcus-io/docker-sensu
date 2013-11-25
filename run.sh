@@ -65,7 +65,7 @@ fi
 if [ ! -z "$SENSU_CHECKS_CONFIG_URL" ] ; then
     wget --no-check-certificate -O /etc/sensu/conf.d/checks.json $SENSU_CHECKS_CONFIG_URL
 else
-    if [ ! -e "/etc/sensu/config.json" ] ; then
+    if [ ! -e "/etc/sensu/conf.d/checks.json" ] ; then
     	cat << EOF > /etc/sensu/conf.d/checks.json
 {
   "checks": {
