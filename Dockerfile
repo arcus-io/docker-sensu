@@ -6,17 +6,20 @@ RUN apt-get install -y wget
 RUN wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | apt-key add -
 RUN echo "deb http://repos.sensuapp.org/apt sensu main" > /etc/apt/sources.list.d/sensu.list
 RUN apt-get update
-RUN RUNLEVEL=1 DEBIAN_FRONTEND=noninteractive apt-get install -y sensu ca-certificates rabbitmq-server redis-server supervisor ruby rubygems git-core
+RUN RUNLEVEL=1 DEBIAN_FRONTEND=noninteractive apt-get install -y sensu ca-certificates rabbitmq-server redis-server supervisor git-core
 RUN git clone https://github.com/sensu/sensu-community-plugins.git /opt/sensu_plugins
 
-RUN gem install sensu-plugin --no-rdoc --no-ri
+RUN ln -s /opt/sensu/embedded/bin/ruby /usr/local/bin/ruby
+RUN ln -s /opt/sensu/embedded/bin/gem /usr/local/bin/gem
+
 RUN gem install redphone --no-rdoc --no-ri
+RUN gem install mail --no-rdoc --no-ri
 
 RUN rm -rf /etc/sensu/plugins
-RUN ln -sf /opt/sensu_plugins/plugins/ /etc/sensu/plugins
-RUN chmod +x /etc/sensu/plugins/*
+RUN ln -sf /opt/sensu_plugins/plugins /etc/sensu/plugins
+RUN find /etc/sensu/plugins/ -name *.rb | xargs chmod +x
 
-ADD supervisor.conf /opt/supervisor.conf
+ADD supervisor.conf /etc/supervisor/conf.d/sensu.conf
 ADD run.sh /usr/local/bin/run
 
 VOLUME /etc/sensu
