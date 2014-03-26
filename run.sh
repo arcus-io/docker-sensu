@@ -125,4 +125,4 @@ EOF
   fi
 fi
 
-supervisord -c /opt/supervisor.conf -n
+/usr/bin/supervisord
