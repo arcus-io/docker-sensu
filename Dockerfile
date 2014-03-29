@@ -16,7 +16,7 @@ RUN cp -Rpf /tmp/sensu_plugins/plugins /etc/sensu/
 RUN find /etc/sensu/plugins/ -name *.rb -exec chmod +x {} \;
 
 ADD supervisor.conf /etc/supervisor/conf.d/sensu.conf
-ADD run.sh /tmp/sensu-install.sh
+ADD run.sh /tmp/sensu-run.sh
 
 VOLUME /etc/sensu
 VOLUME /var/log/sensu
@@ -26,4 +26,4 @@ EXPOSE 5672
 EXPOSE 6379
 EXPOSE 8080
 
-CMD ["/tmp/sensu-install.sh"]
+CMD ["/tmp/sensu-run.sh"]
