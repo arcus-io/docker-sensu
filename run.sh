@@ -73,7 +73,7 @@ else
       "handlers": [
         "default"
       ],
-      "command": "/etc/sensu/plugins/check-procs.rb -p beam -C 1 -w 4 -c 5",
+      "command": "/etc/sensu/plugins/processes/check-procs.rb -p beam -C 1 -w 4 -c 5",
       "interval": 60,
       "occurrences": 2,
       "refresh": 300,
@@ -83,7 +83,7 @@ else
       "handlers": [
         "default"
       ],
-      "command": "/etc/sensu/plugins/check-procs.rb -p epmd -C 1 -w 1 -c 1",
+      "command": "/etc/sensu/plugins/processes/check-procs.rb -p epmd -C 1 -w 1 -c 1",
       "interval": 60,
       "occurrences": 2,
       "refresh": 300,
@@ -93,7 +93,7 @@ else
       "handlers": [
         "default"
       ],
-      "command": "/etc/sensu/plugins/check-procs.rb -p redis-server -C 1 -w 4 -c 5",
+      "command": "/etc/sensu/plugins/processes/check-procs.rb -p redis-server -C 1 -w 4 -c 5",
       "interval": 60,
       "occurrences": 2,
       "refresh": 300,
@@ -103,7 +103,7 @@ else
       "handlers": [
         "default"
       ],
-      "command": "/etc/sensu/plugins/check-procs.rb -p sensu-api -C 1 -w 4 -c 5",
+      "command": "/etc/sensu/plugins/processes/check-procs.rb -p sensu-api -C 1 -w 4 -c 5",
       "interval": 60,
       "occurrences": 2,
       "refresh": 300,
@@ -113,7 +113,7 @@ else
       "handlers": [
         "default"
       ],
-      "command": "/etc/sensu/plugins/check-procs.rb -p sensu-dashboard -C 1 -w 1 -c 1",
+      "command": "/etc/sensu/plugins/processes/check-procs.rb -p sensu-dashboard -C 1 -w 1 -c 1",
       "interval": 60,
       "occurrences": 2,
       "refresh": 300,
