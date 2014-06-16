@@ -7,6 +7,7 @@ RUN echo "deb http://repos.sensuapp.org/apt sensu main" > /etc/apt/sources.list.
 RUN apt-get update
 RUN RUNLEVEL=1 DEBIAN_FRONTEND=noninteractive apt-get install -y sensu ca-certificates rabbitmq-server redis-server supervisor git-core
 
+RUN echo "EMBEDDED_RUBY=true" > /etc/default/sensu & ln -s /opt/sensu/embedded/bin/ruby /usr/bin/ruby
 RUN /opt/sensu/embedded/bin/gem install redphone --no-rdoc --no-ri
 RUN /opt/sensu/embedded/bin/gem install mail --no-rdoc --no-ri
 
